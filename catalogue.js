@@ -2,8 +2,13 @@
 // Each device: id, name, category (phone/tablet), brand, memory, condition,
 // availability, price, description, and optional local image path.
 const devices = [];
+let currentCategory = null;
 const grid = document.getElementById('device-grid');
 function renderDevices(category) {
+  if (category === currentCategory) return;
+  const changing = currentCategory !== null;
+  currentCategory = category;
+  const fragment = document.createDocumentFragment();
   const matches = devices.filter(device => category === 'all' || device.category === category);
   grid.replaceChildren();
   matches.forEach(device => {
@@ -12,13 +17,15 @@ function renderDevices(category) {
     card.href = 'device.html?id=' + encodeURIComponent(device.id);
     if (device.image) {
       const img = document.createElement('img');
-      img.src = device.image; img.alt = device.name; card.append(img);
+      img.src = device.image; img.alt = device.name; img.loading = "lazy"; img.decoding = "async"; img.width = 600; img.height = 600; card.append(img);
     }
     const name = document.createElement('h2'); name.textContent = device.name;
     const price = document.createElement('p'); price.textContent = device.price || 'Ask for price';
     const action = document.createElement('p'); action.textContent = 'View device ↗';
-    card.append(name, price, action); grid.append(card);
+    card.append(name, price, action); fragment.append(card);
   });
+  grid.replaceChildren(fragment);
+  if (changing) window.deadshotMotion?.reveal(matches.length ? grid : document.getElementById('catalogue-empty'));
   document.getElementById('device-count').textContent = matches.length + (matches.length === 1 ? ' device' : ' devices');
   document.getElementById('catalogue-empty').hidden = matches.length > 0;
   document.getElementById('empty-title').textContent = category === 'all' ? 'Devices coming soon.' : category === 'phone' ? 'Phones coming soon.' : 'Tablets coming soon.';
@@ -56,5 +63,6 @@ if (enquiry) {
     const panel = document.getElementById('enquiry-panel');
     panel.hidden = !panel.hidden;
     enquiry.setAttribute('aria-expanded', String(!panel.hidden));
+    if (!panel.hidden) window.deadshotMotion?.reveal(panel);
   });
 }
