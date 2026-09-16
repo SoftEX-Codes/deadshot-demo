@@ -16,4 +16,4 @@ Device specifications use the linked manufacturer region. Display Hz is not a gu
 
 ## Verification
 
-All 12 model geometries and software renders checked for finite vertices and visible pixels. Browser checks cover the published UI, model rotation, detail navigation, category/search/sort state, WhatsApp reveal and narrow layouts. GPU-disabled browsers use the software renderer rather than a static image.
+All 12 model geometries and software renders checked for finite vertices and visible pixels. Published desktop browser checks cover model dragging, detail navigation, all category filters, search reset, price sorting and WhatsApp reveal. The cloud browser has no GPU, so these checks exercised the software renderer. The WebGL path requires a GPU-enabled browser for a separate check. Responsive breakpoints were reviewed in code; a phone viewport was not available in this browser session.
