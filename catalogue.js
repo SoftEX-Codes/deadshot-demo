@@ -1,68 +1,61 @@
-// Add the shop's confirmed inventory here when supplied.
-// Each device: id, name, category (phone/tablet), brand, memory, condition,
-// availability, price, description, and optional local image path.
-const devices = [];
-let currentCategory = null;
-const grid = document.getElementById('device-grid');
-function renderDevices(category) {
-  if (category === currentCategory) return;
-  const changing = currentCategory !== null;
-  currentCategory = category;
-  const fragment = document.createDocumentFragment();
-  const matches = devices.filter(device => category === 'all' || device.category === category);
-  grid.replaceChildren();
-  matches.forEach(device => {
-    const card = document.createElement('a');
-    card.className = 'device-card';
-    card.href = 'device.html?id=' + encodeURIComponent(device.id);
-    if (device.image) {
-      const img = document.createElement('img');
-      img.src = device.image; img.alt = device.name; img.loading = "lazy"; img.decoding = "async"; img.width = 600; img.height = 600; card.append(img);
-    }
-    const name = document.createElement('h2'); name.textContent = device.name;
-    const price = document.createElement('p'); price.textContent = device.price || 'Ask for price';
-    const action = document.createElement('p'); action.textContent = 'View device ↗';
-    card.append(name, price, action); fragment.append(card);
-  });
-  grid.replaceChildren(fragment);
-  if (changing) window.deadshotMotion?.reveal(matches.length ? grid : document.getElementById('catalogue-empty'));
-  document.getElementById('device-count').textContent = matches.length + (matches.length === 1 ? ' device' : ' devices');
-  document.getElementById('catalogue-empty').hidden = matches.length > 0;
-  document.getElementById('empty-title').textContent = category === 'all' ? 'Devices coming soon.' : category === 'phone' ? 'Phones coming soon.' : 'Tablets coming soon.';
-  document.getElementById('empty-description').textContent = category === 'all' ? 'Our device collection will be added soon. Check back for available phones and tablets.' : 'No ' + (category === 'phone' ? 'phones' : 'tablets') + ' are listed yet. Check back for the collection.';
-  document.querySelectorAll('[data-category]').forEach(button => {
-    const selected = button.dataset.category === category;
-    button.classList.toggle('active', selected); button.setAttribute('aria-pressed', String(selected));
-  });
+import { devices, money } from './devices-data.js';
+const arrow = '<svg class="arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="2"/></svg>';
+function el(tag, className, text) { const e = document.createElement(tag); if(className)e.className=className;if(text!==undefined)e.textContent=text;return e; }
+function card(device) {
+  const a=el('a','device-card');a.href='device.html?id='+encodeURIComponent(device.id);a.setAttribute('aria-label',device.name+' — '+money(device.price)+' demo price. View 3D and specifications.');
+  const visual=el('div','card-visual');
+  const img=el('img');img.src='assets/'+device.id+'.svg';img.alt=device.name+' design illustration';img.width=360;img.height=350;img.loading='lazy';img.decoding='async';
+  visual.append(el('span','card-type',device.category==='tablet'?'GAMING TABLET':'GAMING PHONE'),img,el('span','card-3d','EXPLORE IN 3D'));
+  const content=el('div','card-content');content.append(el('p','card-brand',device.family==='ace'?'ONEPLUS / ACE SERIES':device.brand.toUpperCase()),el('h3','',device.name),el('p','card-spec',device.chip+' · '+device.refresh+' display'));
+  const bottom=el('div','card-bottom'),price=el('div','card-price'),action=el('span','card-action');price.append(el('small','','DEMO PRICE'),el('strong','',money(device.price)));action.innerHTML=arrow;bottom.append(price,action);content.append(bottom);a.append(visual,content);return a;
 }
-if (grid) {
-  renderDevices('all');
-  document.querySelectorAll('[data-category]').forEach(button => button.addEventListener('click', () => renderDevices(button.dataset.category)));
-}
-const enquiry = document.getElementById('enquiry-button');
-if (enquiry) {
-  const id = new URLSearchParams(location.search).get('id');
-  const device = devices.find(item => item.id === id);
-  if (device) {
-    document.title = device.name + ' — Deadshot Gadgets';
-    document.getElementById('detail-name').textContent = device.name;
-    document.getElementById('detail-category').textContent = device.category === 'tablet' ? 'GAMING TABLET' : 'GAMING PHONE';
-    document.getElementById('detail-description').textContent = device.description || '';
-    document.getElementById('detail-price').textContent = device.price || 'Ask for price';
-    document.querySelectorAll('#device-specs dd').forEach((el, i) => el.textContent = [device.brand, device.memory, device.condition, device.availability][i] || 'Ask for details');
-    if (device.image) {
-      const img = document.createElement('img'); img.src = device.image; img.alt = device.name;
-      document.getElementById('device-visual').replaceChildren(img);
-    }
-    document.getElementById('device-whatsapp').href = 'https://wa.me/2348146758428?text=' + encodeURIComponent('Hi Deadshot Gadgets, I would like to enquire about ' + device.name + '.');
-  } else if (id) {
-    document.getElementById('detail-name').textContent = 'Device not found';
-    document.getElementById('detail-description').textContent = 'This device is not listed. Browse the collection or ask us on WhatsApp.';
+function fillGrid(target,list){if(!target)return;const f=document.createDocumentFragment();list.forEach(d=>f.append(card(d)));target.replaceChildren(f);}
+fillGrid(document.querySelector('#featured-grid'),[devices[0],devices[4],devices[10]]);
+const grid=document.querySelector('#device-grid');
+if(grid){
+  const allowed=['all','phone','tablet','redmagic','iqoo','oneplus','ace','legion'];
+  const params=new URLSearchParams(location.search);
+  let category=allowed.includes(params.get('category'))?params.get('category'):'all';
+  const search=document.querySelector('#device-search'),sort=document.querySelector('#device-sort');
+  search.value=params.get('q')||'';
+  if(['featured','price-asc','price-desc','name'].includes(params.get('sort')))sort.value=params.get('sort');
+  function render(animate=false){
+    const query=search.value.trim().toLowerCase();
+    const list=devices.filter(d=>(category==='all'||d.category===category||d.family===category)&&[d.name,d.brand,d.family,d.chip].join(' ').toLowerCase().includes(query));
+    if(sort.value==='price-asc')list.sort((a,b)=>a.price-b.price);
+    if(sort.value==='price-desc')list.sort((a,b)=>b.price-a.price);
+    if(sort.value==='name')list.sort((a,b)=>a.name.localeCompare(b.name));
+    fillGrid(grid,list);
+    document.querySelector('#catalogue-empty').hidden=!!list.length;
+    document.querySelector('#device-count').textContent=String(list.length).padStart(2,'0')+' / '+devices.length+' devices';
+    document.querySelectorAll('[data-category]').forEach(b=>{b.classList.toggle('active',b.dataset.category===category);b.setAttribute('aria-pressed',String(b.dataset.category===category));});
+    const url=new URL(location.href);url.search='';if(category!=='all')url.searchParams.set('category',category);if(query)url.searchParams.set('q',search.value.trim());if(sort.value!=='featured')url.searchParams.set('sort',sort.value);history.replaceState(null,'',url);
+    if(animate)window.deadshotMotion?.reveal(grid,0,850);
   }
-  enquiry.addEventListener('click', () => {
-    const panel = document.getElementById('enquiry-panel');
-    panel.hidden = !panel.hidden;
-    enquiry.setAttribute('aria-expanded', String(!panel.hidden));
-    if (!panel.hidden) window.deadshotMotion?.reveal(panel);
-  });
+  document.querySelectorAll('[data-category]').forEach(b=>b.addEventListener('click',()=>{category=b.dataset.category;render(true);}));
+  search.addEventListener('input',()=>render());sort.addEventListener('change',()=>render(true));
+  document.querySelector('#clear-filters').addEventListener('click',()=>{category='all';search.value='';sort.value='featured';render(true);search.focus();});render();
+}
+const title=document.querySelector('#detail-name');
+if(title){
+  const id=new URLSearchParams(location.search).get('id')||devices[0].id;
+  const d=devices.find(d=>d.id===id);
+  if(!d){
+    const main=document.querySelector('#main-content');main.replaceChildren();const error=el('section','error-state');error.append(el('p','eyebrow','DEVICE NOT FOUND'),el('h1','','Try the collection.'),el('p','','That device is not part of this demo lineup.'));const link=el('a','button button-primary','Explore gaming devices');link.href='devices.html';error.append(link);main.append(error);document.title='Device not found — Deadshot Gadgets';
+  } else {
+    document.title=d.name+' — Deadshot Gadgets';title.textContent=d.name;
+    document.querySelector('#breadcrumb-name').textContent=d.name;
+    document.querySelector('#detail-category').textContent=d.brand.toUpperCase()+' / '+(d.category==='tablet'?'GAMING TABLET':'GAMING PHONE');
+    document.querySelector('#detail-tag').textContent=d.tag;document.querySelector('#detail-description').textContent=d.description;
+    document.querySelector('#device-price').textContent=money(d.price);
+    const specs=[['Processor',d.chip],['Display',d.display],['Refresh rate',d.refresh],['RAM / storage',d.memory],['Battery',d.battery],['Charging',d.charging],['Version',d.region],['Availability','Demo listing — enquire for stock']];
+    const dl=document.querySelector('#device-specs');specs.forEach(([name,value])=>{const row=el('div');row.append(el('dt','',name),el('dd','',value));dl.append(row);});
+    const highlights=document.querySelector('#spec-highlights');[[d.refresh,'DISPLAY'],[d.memory.split(' / ')[0],'RAM'],[d.battery.replace('mAh',''),'mAh BATTERY']].forEach(([v,k])=>{const item=el('div');item.append(el('strong','',v),el('small','',k));highlights.append(item);});
+    document.querySelector('#spec-source').href=d.source;
+    document.querySelector('#model-label').textContent=d.name.toUpperCase();document.querySelector('.model-index').textContent='[ '+String(devices.indexOf(d)+1).padStart(2,'0')+' / 12 ]';
+    const fallback=document.querySelector('#model-fallback');fallback.src='assets/'+d.id+'.svg';fallback.alt=d.name+' design illustration';document.querySelector('#phone-viewer').dataset.device=d.id;
+    document.querySelector('#device-whatsapp').href='https://wa.me/2348146758428?text='+encodeURIComponent('Hi Deadshot Gadgets, I am interested in the '+d.name+' ('+d.memory+'). Please confirm the current price and availability.');
+    const button=document.querySelector('#enquiry-button'),panel=document.querySelector('#enquiry-panel');button.addEventListener('click',()=>{panel.hidden=!panel.hidden;button.setAttribute('aria-expanded',String(!panel.hidden));if(!panel.hidden)window.deadshotMotion?.reveal(panel,0,900);});
+    fillGrid(document.querySelector('#related-grid'),devices.filter(x=>x.id!==d.id&&x.category===d.category).slice(0,3));
+  }
 }
