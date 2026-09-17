@@ -17,6 +17,10 @@ assert.equal(answerQuestion('How much is the REDMAGIC 10 Pro?',seed).refer,false
 assert.equal(answerQuestion('Does REDMAGIC 10 Pro do 120fps in CODM?',seed).refer,true);
 assert.equal(answerQuestion('Is the OnePlus 13 waterproof?',seed).refer,true);
 assert.equal(answerQuestion('What about delivery?',seed).refer,true);
+assert.match(answerQuestion('RAM vs storage?',seed).text,/Virtual RAM/);
+assert.match(answerQuestion('What is refresh rate?',seed).text,/does not guarantee/);
+assert.match(answerQuestion('How does fast charging work?',seed).text,/charging protocol/);
+assert.equal(answerQuestion('What FPS does the OnePlus 13 get in CODM?',seed).refer,true);
 assert.deepEqual(answerQuestion('iQOO 13 vs OnePlus 13',seed).ids.sort(),['iqoo-13','oneplus-13']);
 assert.deepEqual(answerQuestion('Red Magic 10 Pro battery',seed).ids,['redmagic-10-pro']);
 assert.ok(answerQuestion('show infinix phones',seed).ids.every(id=>id.startsWith('infinix')));

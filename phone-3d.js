@@ -1,4 +1,4 @@
-import { devices } from './devices-data.js?v=5';
+import { devices } from './devices-data.js?v=6';
 const host=document.querySelector('#phone-viewer');
 
 const device=devices.find(d=>d.id===host?.dataset.device);
@@ -26,7 +26,7 @@ async function start(){
     canvas.addEventListener('webglcontextlost',async e=>{e.preventDefault();if(software)return;cancelAnimationFrame(frame);const old=canvas;renderer.dispose();const {PhoneSoftwareRenderer}=await import('./vendor/phone-software-renderer.js');renderer=new PhoneSoftwareRenderer();software=true;renderer.setPixelRatio(1.25);old.remove();bind();resize();host.dataset.renderer='software';sync();});
   }
   try {
-    const [T,{buildDevice,loadDeviceTextures}]=await Promise.all([import('./vendor/three.module.min.js'),import('./device-model.js?v=5')]);
+    const [T,{buildDevice,loadDeviceTextures}]=await Promise.all([import('./vendor/three.module.min.js'),import('./device-model.js?v=6')]);
     scene=new T.Scene();camera=new T.PerspectiveCamera(35,1,.1,40);scene.add(new T.HemisphereLight(0xffffff,0x6b726a,3));
     for(const [color,intensity,x,y,z] of [[0xffffff,4,-4,5,6],[0xdaefcf,3,4,1,-4],[0xabc7ff,2,-3,-2,-4]]){const l=new T.DirectionalLight(color,intensity);l.position.set(x,y,z);scene.add(l);}
     model=buildDevice(device,await loadDeviceTextures());model.rotation.set(.06,Math.PI+.34,-.055);scene.add(model);

@@ -1,6 +1,6 @@
-import {employee,devices,catalogueError} from './store.js?v=5';
-import {money} from './devices-data.js?v=5';
-import {imageFor,safeLink} from './device-utils.js?v=5';
+import {employee,devices,catalogueError} from './store.js?v=6';
+import {money} from './devices-data.js?v=6';
+import {imageFor,safeLink} from './device-utils.js?v=6';
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
 function card(d){
  const article=el('article','device-card'),a=el('a','device-card-link');a.href='device.html?id='+encodeURIComponent(d.id);a.setAttribute('aria-label',d.name+' — '+money(d.price)+' demo price. View details.');

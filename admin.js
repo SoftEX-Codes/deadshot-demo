@@ -1,6 +1,6 @@
-import {cloudEnabled,employee,readDevices,saveDevice,uploadImage,signOut,resetPreview} from './store.js?v=5';
-import {money} from './devices-data.js?v=5';
-import {imageFor,safeImage} from './device-utils.js?v=5';
+import {cloudEnabled,employee,readDevices,saveDevice,uploadImage,signOut,resetPreview} from './store.js?v=6';
+import {money} from './devices-data.js?v=6';
+import {imageFor,safeImage} from './device-utils.js?v=6';
 const make=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
 const root=document.querySelector('#admin-workspace'),form=document.querySelector('#device-editor'),notice=document.querySelector('#admin-status');
 let rows=[],current=null,dirty=false,busy=false,upload=null;
@@ -27,11 +27,12 @@ function specRow(label='',value=''){
 }
 function previewImage(){const src=safeImage(field('image').value,true);const img=document.querySelector('#editor-photo');img.hidden=!src;img.src=src||'assets/redmagic-10-pro.svg';}
 function edit(d=null){
-  form.reset();delete field('id').dataset.manual;current=d;upload=null;document.querySelector('#extra-specs').replaceChildren();
+  form.reset();say('');delete field('id').dataset.manual;current=d;upload=null;document.querySelector('#extra-specs').replaceChildren();
   const values=d||{category:'phone',family:'redmagic',status:'draft',color:'#707b71',cameras:'round',region:'Confirm version'};
   for(const [key,value]of Object.entries(values)){const e=field(key);if(e&&typeof value!=='object')e.value=value;}
   field('id').readOnly=!!d;document.querySelector('#editor-title').textContent=d?'EDIT DEVICE.':'NEW DEVICE.';
   (d?.specs||[]).forEach(s=>specRow(s.label,s.value));pending(false);previewImage();
+  if(!d)document.querySelector('#unsaved-status').textContent='New device — not saved';
   const link=document.querySelector('#preview-device');link.hidden=!d||d.status!=='published';if(d)link.href='device.html?id='+encodeURIComponent(d.id);
   document.querySelector('#image-help').textContent='JPG, PNG or WebP, up to 5 MB. Images are resized for fast loading.';
   document.querySelector('#save-device').textContent=field('status').value==='published'?'Publish changes':'Save draft';
@@ -48,7 +49,7 @@ try{
   }
 }catch(error){document.querySelector('#admin-gate').hidden=false;document.querySelector('#gate-message').textContent='Unable to load employee access. Please sign in again.';}
 document.querySelector('#admin-search').addEventListener('input',list);document.querySelector('#admin-filter').addEventListener('change',list);
-document.querySelector('#new-device').addEventListener('click',()=>{if(dirty&&!confirm('Discard the unsaved changes?'))return;edit();form.scrollIntoView({behavior:'smooth',block:'start'});field('name').focus();});
+document.querySelector('#new-device').addEventListener('click',()=>{if(dirty&&!confirm('Discard the unsaved changes?'))return;document.querySelector('#admin-search').value='';document.querySelector('#admin-filter').value='all';list();edit();form.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});field('name').focus();});
 form.addEventListener('input',()=>pending(true));
 field('name').addEventListener('input',()=>{if(!current&&!field('id').dataset.manual)field('id').value=field('name').value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80);});
 field('id').addEventListener('input',()=>field('id').dataset.manual='yes');
