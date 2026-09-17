@@ -1,0 +1,38 @@
+# Product photograph credits
+
+Real device marketing photographs, resized to WebP for this design demo. Product photos are separate from the original Three.js homepage illustration. Manufacturers retain their trademarks and image rights. Demo colour and regional configurations may differ. Replace photos with the shop’s own stock photos before launch.
+
+- **REDMAGIC 10 Pro** — [photograph](https://cdn.shopify.com/s/files/1/0024/0684/2441/files/10pro-1.png?v=1745412738&width=800) · [specifications](https://global.redmagic.gg/pages/redmagic-10-pro-specs)
+- **REDMAGIC 9 Pro** — [photograph](https://m.media-amazon.com/images/I/81gxSy-nzGL.jpg) · [specifications](https://global.redmagic.gg/pages/redmagic-9-pro-specs)
+- **REDMAGIC Astra** — [photograph](https://cdn.shopify.com/s/files/1/0024/0684/2441/files/03_26d470f5-406b-4f5f-b714-ab87fe60293a.png?v=1773140788&width=800) · [specifications](https://global.redmagic.gg/pages/redmagic-astra-gaming-tablet-specs)
+- **REDMAGIC Nova** — [photograph](https://cdn.shopify.com/s/files/1/0024/0684/2441/files/7_dc6b500a-3567-494e-b2a7-d7dbed47ea87.png?v=1728724951&width=800) · [specifications](https://global.redmagic.gg/pages/redmagic-nova-gaming-tablet-specs)
+- **iQOO 13** — [photograph](https://in-exstatic-vivofs.vivo.com/gdHFRinHEMrj3yPG/1751606283236/673b354bc871362a8ad88eb74012c95c.png) · [specifications](https://www.iqoo.com/in/products/param/iqoo13)
+- **iQOO 12** — [photograph](https://in-exstatic-vivofs.vivo.com/gdHFRinHEMrj3yPG/1712137607116/cbb39dcf45d63b826f9e682464e10324.png) · [specifications](https://www.iqoo.com/in/products/param/iqoo12)
+- **OnePlus 13** — [photograph](https://oasis.opstatics.com/content/dam/oasis/page/2024/global/phones/13/specs/13-blue.png) · [specifications](https://www.oneplus.com/global/13/specs)
+- **OnePlus 12** — [photograph](https://oasis.opstatics.com/content/dam/oasis/page/2023/cn/12/12-green.png) · [specifications](https://www.oneplus.com/global/12/specs)
+- **OnePlus Ace 5** — [photograph](https://oasisstatics.oneplus.cn/content/dam/oasis/page/2024/cn/ace-5/Aston-gold.png) · [specifications](https://www.oneplus.com/cn/ace-5/specs)
+- **OnePlus Ace 5 Pro** — [photograph](https://oasisstatics.oneplus.cn/content/dam/oasis/page/2024/cn/ace-5-pro/Aston-purple.png) · [specifications](https://www.oneplus.com/cn/ace-5-pro/specs)
+- **Legion Tab Gen 3** — [photograph](https://p2-ofp.static.pub/fes/cms/2024/12/20/tv72ln1e57tjjf3qh9gfara6f193c8856596.png) · [specifications](https://psref.lenovo.com/syspool/Sys/PDF/Lenovo_Tablets/Legion_Tab_8.8_3/Legion_Tab_8.8_3_Spec.html)
+- **Legion Tab (8+ Gen 1)** — [photograph](https://pliki.telepolis.pl/images/2024/03/Lenovo-Legion-Tab-8.8-Gen-2-cena-02.jpg) · [specifications](https://psref.lenovo.com/syspool/Sys/PDF/Lenovo_Tablets/Legion_Tab/Legion_Tab_Spec.PDF)
+- **REDMAGIC 8S Pro** — [photograph](https://global.redmagic.gg/cdn/shop/files/REDMAGIC-8S-Pro-Media-Midnight-1.png) · [specifications](https://global.redmagic.gg/pages/redmagic-8s-pro-specs)
+- **REDMAGIC 9S Pro** — [photograph](https://heyupnow.com/cdn/shop/files/9s-_1.png?v=1722422725) · [specifications](https://redmagic.gg/pages/redmagic-9s-pro-specs)
+- **REDMAGIC 10S Pro** — [photograph](https://cdn.shopify.com/s/files/1/0024/0684/2441/files/Nightfall_01.png?v=1761568788&width=800) · [specifications](https://global.redmagic.gg/pages/redmagic-10s-pro-specs)
+- **REDMAGIC 11 Pro** — [photograph](https://cdn.shopify.com/s/files/1/0024/0684/2441/files/Black-01_c2008068-b72a-45b3-ad1b-42a24d426821.png?v=1776831492&width=800) · [specifications](https://global.redmagic.gg/pages/redmagic-11-pro-specs)
+- **iQOO 11** — [photograph](https://in-exstatic-vivofs.vivo.com/gdHFRinHEMrj3yPG/1680072254141/55011e060a4294da9abedd31e1062868.png) · [specifications](https://www.iqoo.com/in/products/param/iqoo11)
+- **iQOO Neo9 Pro** — [photograph](https://in-exstatic-vivofs.vivo.com/gdHFRinHEMrj3yPG/1707995261270/102651e0f5983f8cbb5b3fb06ea49f7c.png) · [specifications](https://www.iqoo.com/in/products/param/neo9pro)
+- **iQOO Neo10** — [photograph](https://in-exstatic-vivofs.vivo.com/gdHFRinHEMrj3yPG/1777539566021/fe6e36b8cc0d842b2259ad5b9ce0bed1.png) · [specifications](https://www.iqoo.com/in/products/param/neo10)
+- **OnePlus 11** — [photograph](https://oasis.opstatics.com/content/dam/oasis/page/2023/na/oneplus-11/specs/green-img.png) · [specifications](https://www.oneplus.com/global/11/specs)
+- **OnePlus 12R** — [photograph](https://oasis.opstatics.com/content/dam/oasis/page/2024/global/product/aston/aston_blue.png) · [specifications](https://www.oneplus.com/global/12r/specs)
+- **OnePlus 13R** — [photograph](https://oasis.opstatics.com/content/dam/oasis/page/2024/global/phones/13r/specs/13R-Trail.png) · [specifications](https://www.oneplus.com/global/13r/specs)
+- **OnePlus Ace 3** — [photograph](https://oasisstatics.oneplus.cn/content/dam/oasis/page/2024/aston/cn/Aston-gold.png) · [specifications](https://www.oneplus.com/cn/ace-3/specs)
+- **OnePlus Ace 3 Pro** — [photograph](https://oasisstatics.oneplus.cn/content/dam/oasis/page/2024/global/product/corvette/specs/1080-1080white.png) · [specifications](https://www.oneplus.com/cn/ace-3-pro/specs)
+- **REDMI K Pad** — [photograph](https://down-ph.img.susercontent.com/file/ph-11134207-7ra0m-mbm87qalmhu368) · [specifications](https://www.mi.com/shop/buy/detail?product_id=21413)
+- **Xiaomi Pad Mini** — [photograph](https://i02.appmifile.com/574_operator_sg/02/09/2025/d0f5906acb1f164a44372ce27d8ba548.jpg) · [specifications](https://www.mi.com/global/product/xiaomi-pad-mini/specs/)
+- **Xiaomi Pad 7 Pro** — [photograph](https://i02.appmifile.com/149_operator_sg/19/02/2025/5f0e3fbf0973079fc48af2a82819c602.png) · [specifications](https://www.mi.com/global/product/xiaomi-pad-7-pro/specs/)
+- **REDMI Turbo 3** — [photograph](https://i.ebayimg.com/images/g/SPQAAOSwpotmF0cu/s-l1200.jpg) · [specifications](https://www.mi.com/prod/redmi-turbo-3)
+- **REDMI Turbo 4** — [photograph](https://abtahishop.com/images/mobiles/xiaomi-redmi-turbo-4.webp) · [specifications](https://www.mi.com/prod/redmi-turbo-4)
+- **REDMI Turbo 4 Pro** — [photograph](https://storage.yandexcloud.net/mobiltelefon/april25/24/anons_redmi_turbo_4_pro___picture2_0.jpg) · [specifications](https://www.mi.com/prod/redmi-turbo-4-pro)
+- **Infinix GT 20 Pro** — [photograph](https://cdn.mobilecity.vn/mobilecity-vn/images/2024/05/infinix-gt20-pro-5g-mecha-orange.jpg) · [specifications](https://wap.infinixmobility.com/specs/gt-20-pro)
+- **Infinix GT 30 Pro** — [photograph](https://clickbuy.com.vn/uploads/news/infinix-gt-30-pro-8584328924084735194.png) · [specifications](https://www.infinixmobility.com/gt-30-pro)
+
+Homepage model uses REDMAGIC’s official 10 Pro Shadow gallery, front and back photographs mapped onto a proportioned 3D body. Geometry around the edges is approximate.

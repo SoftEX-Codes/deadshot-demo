@@ -1,0 +1,3 @@
+[functions.device-assistant]
+# The handler validates auth.getUser() explicitly. Never trust an unverified JWT.
+verify_jwt = false

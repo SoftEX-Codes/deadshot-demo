@@ -1,0 +1,12 @@
+{
+  "name": "deadshot-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/core.mjs",
+    "test:db": "node tests/postgres.mjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.8"
+  }
+}

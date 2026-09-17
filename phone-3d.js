@@ -1,7 +1,7 @@
-import { devices } from './devices-data.js';
+import { devices } from './devices-data.js?v=5';
 const host=document.querySelector('#phone-viewer');
-const selected=new URLSearchParams(location.search).get('id');
-const device=devices.find(d=>d.id===(selected||host?.dataset.device));
+
+const device=devices.find(d=>d.id===host?.dataset.device);
 const preference=matchMedia('(prefers-reduced-motion: reduce)');
 let started=false;
 async function start(){
@@ -22,14 +22,14 @@ async function start(){
     canvas.addEventListener('pointerdown',e=>{if(e.button!==0)return;paused=true;label();drag={id:e.pointerId,x:e.clientX};canvas.setPointerCapture(e.pointerId);sync();});
     canvas.addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;model.rotation.y+=(e.clientX-drag.x)*.012;drag.x=e.clientX;draw();});
     const release=()=>{drag=null;sync();};['pointerup','pointercancel','lostpointercapture'].forEach(e=>canvas.addEventListener(e,release));
-    canvas.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home',' '].includes(e.key))return;e.preventDefault();if(e.key===' '){paused=!paused;label();sync();return;}paused=true;label();sync();if(e.key==='Home')model.rotation.set(.08,-.5,-.10);else model.rotation.y+=e.key==='ArrowLeft'?-.22:.22;draw();});
+    canvas.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home',' '].includes(e.key))return;e.preventDefault();if(e.key===' '){paused=!paused;label();sync();return;}paused=true;label();sync();if(e.key==='Home')model.rotation.set(.06,Math.PI+.34,-.055);else model.rotation.y+=e.key==='ArrowLeft'?-.22:.22;draw();});
     canvas.addEventListener('webglcontextlost',async e=>{e.preventDefault();if(software)return;cancelAnimationFrame(frame);const old=canvas;renderer.dispose();const {PhoneSoftwareRenderer}=await import('./vendor/phone-software-renderer.js');renderer=new PhoneSoftwareRenderer();software=true;renderer.setPixelRatio(1.25);old.remove();bind();resize();host.dataset.renderer='software';sync();});
   }
   try {
-    const [T,{buildDevice}]=await Promise.all([import('./vendor/three.module.min.js'),import('./device-model.js')]);
+    const [T,{buildDevice,loadDeviceTextures}]=await Promise.all([import('./vendor/three.module.min.js'),import('./device-model.js?v=5')]);
     scene=new T.Scene();camera=new T.PerspectiveCamera(35,1,.1,40);scene.add(new T.HemisphereLight(0xffffff,0x6b726a,3));
     for(const [color,intensity,x,y,z] of [[0xffffff,4,-4,5,6],[0xdaefcf,3,4,1,-4],[0xabc7ff,2,-3,-2,-4]]){const l=new T.DirectionalLight(color,intensity);l.position.set(x,y,z);scene.add(l);}
-    model=buildDevice(device);model.rotation.set(.08,-.5,-.10);scene.add(model);
+    model=buildDevice(device,await loadDeviceTextures());model.rotation.set(.06,Math.PI+.34,-.055);scene.add(model);
     // Probe first. GPU-disabled browsers still get a real mesh rendered in 2D.
     const testCanvas=document.createElement('canvas');let context=null;
     try{context=testCanvas.getContext('webgl2',{alpha:true,antialias:true,powerPreference:'low-power'});}catch{}
@@ -39,13 +39,13 @@ async function start(){
     host.classList.add('is-3d');host.dataset.renderer=software?'software':'webgl';host.dataset.state='ready';controls.hidden=false;status.textContent='Drag to rotate · 3D ready';label();sync();
     document.querySelector('#model-label').textContent=device.name.toUpperCase();
     pause.addEventListener('click',()=>{paused=!paused;label();sync();});
-    document.querySelector('#phone-reset').addEventListener('click',()=>{paused=true;label();sync();model.rotation.set(.08,-.5,-.10);draw();});
+    document.querySelector('#phone-reset').addEventListener('click',()=>{paused=true;label();sync();model.rotation.set(.06,Math.PI+.34,-.055);draw();});
     document.querySelector('#phone-front').addEventListener('click',()=>setAngle(false));document.querySelector('#phone-back').addEventListener('click',()=>setAngle(true));
     new ResizeObserver(resize).observe(host);
     new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;sync();},{threshold:.01}).observe(host);
     document.addEventListener('visibilitychange',sync);preference.addEventListener('change',()=>{paused=preference.matches;label();sync();});
     window.addEventListener('pagehide',e=>{cancelAnimationFrame(frame);if(!e.persisted){disposed=true;renderer.dispose();model.traverse(m=>{m.geometry?.dispose();if(m.material){for(const material of(Array.isArray(m.material)?m.material:[m.material])){material.map?.dispose();material.dispose();}}});}});
     window.addEventListener('pageshow',e=>{if(e.persisted)sync();});
-  }catch(error){renderer?.dispose();canvas?.remove();host.classList.remove('is-3d');controls.hidden=true;status.textContent='3D preview unavailable. Device illustration shown.';host.dataset.state='fallback';console.warn('Device viewer:',error);}
+  }catch(error){renderer?.dispose();canvas?.remove();host.classList.remove('is-3d');controls.hidden=true;status.textContent='3D preview unavailable. Product photograph shown.';host.dataset.state='fallback';console.warn('Device viewer:',error);}
 }
 if(host&&device){if('IntersectionObserver'in window){const observer=new IntersectionObserver(([e])=>{if(e.isIntersecting){observer.disconnect();start();}},{rootMargin:'180px'});observer.observe(host);}else start();}
