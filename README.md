@@ -1,4 +1,4 @@
-# Deadshot Gadgets demo
+# MCOD GADGET STORE demo
 
 [Open the website](https://softex-codes.github.io/deadshot-demo/)
 

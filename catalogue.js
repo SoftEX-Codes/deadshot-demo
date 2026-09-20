@@ -26,7 +26,7 @@ if(grid){
   document.querySelector('#device-count').textContent=String(list.length).padStart(2,'0')+' / '+devices.length+' devices';
   document.querySelectorAll('[data-category]').forEach(b=>{b.classList.toggle('active',b.dataset.category===category);b.setAttribute('aria-pressed',String(b.dataset.category===category));});
   const url=new URL(location.href);url.search='';if(category!=='all')url.searchParams.set('category',category);if(q)url.searchParams.set('q',search.value.trim());if(sort.value!=='featured')url.searchParams.set('sort',sort.value);history.replaceState(null,'',url);
-  if(animate)window.deadshotMotion?.reveal(grid,0,850);
+  if(animate)window.mcodMotion?.reveal(grid,0,850);
  }
  document.querySelectorAll('[data-category]').forEach(b=>b.addEventListener('click',()=>{category=b.dataset.category;render(true);}));search.addEventListener('input',()=>render());sort.addEventListener('change',()=>render(true));
  document.querySelector('#clear-filters').addEventListener('click',()=>{category='all';search.value='';sort.value='featured';render(true);search.focus();});render();
@@ -34,17 +34,17 @@ if(grid){
 const title=document.querySelector('#detail-name');
 if(title){
  const id=new URLSearchParams(location.search).get('id')||devices[0]?.id,d=devices.find(d=>d.id===id);
- if(!d){const main=document.querySelector('#main-content');main.replaceChildren();const error=el('section','error-state');error.append(el('p','eyebrow','DEVICE NOT FOUND'),el('h1','','Try the collection.'),el('p','','This device is not currently listed.'));const link=el('a','button button-primary','Explore gaming devices');link.href='devices.html';error.append(link);main.append(error);document.title='Device not found — Deadshot Gadgets';}
+ if(!d){const main=document.querySelector('#main-content');main.replaceChildren();const error=el('section','error-state');error.append(el('p','eyebrow','DEVICE NOT FOUND'),el('h1','','Try the collection.'),el('p','','This device is not currently listed.'));const link=el('a','button button-primary','Explore gaming devices');link.href='devices.html';error.append(link);main.append(error);document.title='Device not found — MCOD GADGET STORE';}
  else{
-  document.title=d.name+' — Deadshot Gadgets';title.textContent=d.name;document.querySelector('#breadcrumb-name').textContent=d.name;
+  document.title=d.name+' — MCOD GADGET STORE';title.textContent=d.name;document.querySelector('#breadcrumb-name').textContent=d.name;
   document.querySelector('#detail-category').textContent=d.brand.toUpperCase()+' / '+(d.category==='tablet'?'GAMING TABLET':'GAMING PHONE');document.querySelector('#detail-tag').textContent=d.tag;document.querySelector('#detail-description').textContent=d.description;document.querySelector('#device-price').textContent=money(d.price);
   const specs=[['Processor',d.chip],['Display',d.display],['Refresh rate',d.refresh],['RAM / storage',d.memory],['Battery',d.battery],['Charging',d.charging],['Version',d.region],...(d.specs||[]).map(s=>[s.label,s.value]),['Availability','Demo listing — enquire for stock']];
   const dl=document.querySelector('#device-specs');specs.forEach(([k,v])=>{const row=el('div');row.append(el('dt','',k),el('dd','',v));dl.append(row);});
   const highlights=document.querySelector('#spec-highlights');[[d.refresh,'DISPLAY'],[d.memory.split(' / ')[0],'RAM'],[d.battery.replace('mAh',''),'mAh BATTERY']].forEach(([v,k])=>{const item=el('div');item.append(el('strong','',v),el('small','',k));highlights.append(item);});
   const source=document.querySelector('#spec-source');source.hidden=!safeLink(d.source);source.href=safeLink(d.source);const photo=document.querySelector('#device-photo');photo.src=imageFor(d);photo.alt=d.name+' product photograph';document.querySelector('#photo-brand').textContent=d.brand;
   const photoSource=document.querySelector('#photo-source');photoSource.hidden=!safeLink(d.photoSource||d.source);photoSource.href=safeLink(d.photoSource||d.source);
-  document.querySelector('#detail-add-cart').dataset.addCart=d.id;document.querySelector('#device-whatsapp').href='https://wa.me/2348146758428?text='+encodeURIComponent('Hi Deadshot Gadgets, I am interested in the '+d.name+' ('+d.memory+'). Please confirm the current price and availability.');
-  const button=document.querySelector('#enquiry-button'),panel=document.querySelector('#enquiry-panel');button.addEventListener('click',()=>{panel.hidden=!panel.hidden;button.setAttribute('aria-expanded',String(!panel.hidden));if(!panel.hidden)window.deadshotMotion?.reveal(panel,0,900);});
+  document.querySelector('#detail-add-cart').dataset.addCart=d.id;document.querySelector('#device-whatsapp').href='https://wa.me/2349038237257?text='+encodeURIComponent('Hi MCOD GADGET STORE, I am interested in the '+d.name+' ('+d.memory+'). Please confirm the current price and availability.');
+  const button=document.querySelector('#enquiry-button'),panel=document.querySelector('#enquiry-panel');button.addEventListener('click',()=>{panel.hidden=!panel.hidden;button.setAttribute('aria-expanded',String(!panel.hidden));if(!panel.hidden)window.mcodMotion?.reveal(panel,0,900);});
   fillGrid(document.querySelector('#related-grid'),devices.filter(x=>x.id!==d.id&&x.category===d.category).slice(0,3));
  }
 }
