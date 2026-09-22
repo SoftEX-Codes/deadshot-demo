@@ -1,4 +1,4 @@
-import {cloudEnabled,getClient,employee,enterPreview,signOut} from './store.js?v=6';
+import {cloudEnabled,getClient,employee,enterPreview,signOut} from './store.js?v=7';
 const form=document.querySelector('#login-form'),message=document.querySelector('#auth-message');
 const staff=new URLSearchParams(location.search).get('role')==='employee';
 let mode='login',recovery=false;

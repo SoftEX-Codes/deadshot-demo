@@ -5,7 +5,7 @@ Status: source is ready; no project has been provisioned, no migrations applied,
 1. Choose the Supabase organization and review the project cost before creating the project. The connected account currently has `SoftEx Dev Org`; the provisioning tool requires the owner to choose the organization and confirm the returned cost.
 2. Apply `migrations/001_catalogue.sql`, then `002_seed_devices.sql` to a new project. The seed contains every existing demo device. It never overwrites existing records.
 3. In Auth, set the site URL to `https://softex-codes.github.io/deadshot-demo/` and allow `https://softex-codes.github.io/deadshot-demo/login.html` for email confirmation and password recovery. Keep email confirmation enabled. Configure suitable email delivery before onboarding real employees.
-4. Put the project URL and **publishable key** in `site-config.js`, then publish to GitHub Pages. Never put a service-role key or AI key in frontend files.
+4. Put the project URL and **publishable key** in `site-config.js`, run `npm run render:catalogue` to remove static seed prices, then publish to GitHub Pages. Never put a service-role key or AI key in frontend files.
 5. The owner creates or approves staff users in Supabase Auth. Grant an approved user's UUID access using the owner-only SQL below. Customer signup creates no employee role. No employee may grant themselves or another user access through this website.
 
 ```sql

@@ -40,3 +40,13 @@
 @keyframes chat-thinking{50%{opacity:.5}}
 @media(max-width:480px){.assistant-launch{width:58px;height:58px;padding:0}.assistant-panel{bottom:88px;max-height:calc(100dvh - 106px)}.chat-tooltip{display:none}}
 @media(prefers-reduced-motion:reduce){.assistant-launch,.assistant-launch svg,.chat-tooltip,.assistant-quick button,.assistant-form button,.cart-quantity button,.icon-button,.device-card .card-visual img{transition:none}.assistant-launch::before,.assistant-panel[open],.assistant-panel[open].is-closing,.chat-message,.chat-message.thinking{animation:none}.device-card:hover .card-visual img,.device-card:focus-within .card-visual img{transform:none}}
+/* Prices remain visible in the initial page before scripts load. */
+.hero-price-note{font:11px/1.8 var(--mono);color:var(--muted);margin:22px 0 0;max-width:440px}
+.hero-price-note a{display:inline-block;text-decoration:underline;text-underline-offset:4px}
+.hero-price-note strong{color:var(--ink);white-space:nowrap}
+.category-price{font:10px/1.7 var(--mono);margin:-10px 0 20px}
+.category-price strong{display:block;font-size:12px}
+.footer-contact{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:12px;padding:0 0 24px}
+.footer-contact span{color:var(--muted)}.footer-contact a{text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}
+.phone-viewer:not(.is-3d) canvas{visibility:hidden}
+@media(max-width:480px){.hero-price-note{font-size:10px}.category-price strong{font-size:10px}.category-price{font-size:9px}}

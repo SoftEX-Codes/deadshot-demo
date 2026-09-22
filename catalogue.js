@@ -1,6 +1,6 @@
-import {employee,devices,catalogueError} from './store.js?v=6';
-import {money} from './devices-data.js?v=6';
-import {imageFor,safeLink} from './device-utils.js?v=6';
+import {employee,devices,catalogueError} from './store.js?v=7';
+import {money} from './devices-data.js?v=7';
+import {imageFor,safeLink} from './device-utils.js?v=7';
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
 function card(d){
  const article=el('article','device-card'),a=el('a','device-card-link');a.href='device.html?id='+encodeURIComponent(d.id);a.setAttribute('aria-label',d.name+' — '+money(d.price)+' demo price. View details.');
@@ -14,6 +14,10 @@ function fillGrid(target,list){if(target)target.replaceChildren(...list.map(card
 fillGrid(document.querySelector('#featured-grid'),['redmagic-10-pro','iqoo-13','legion-tab-gen-3'].map(id=>devices.find(d=>d.id===id)).filter(Boolean));
 for(const e of document.querySelectorAll('[data-total-devices]'))e.textContent=String(devices.length);
 for(const e of document.querySelectorAll('[data-type-count]'))e.textContent=String(devices.filter(d=>d.category===e.dataset.typeCount).length).padStart(2,'0');
+for(const e of document.querySelectorAll('[data-price-from],[data-price-range]')){
+ const category=e.dataset.priceFrom||e.dataset.priceRange,prices=devices.filter(d=>d.category===category).map(d=>d.price);
+ e.textContent=prices.length?(e.hasAttribute('data-price-range')?money(Math.min(...prices))+'–'+money(Math.max(...prices)):money(Math.min(...prices))):'enquire for details';
+}
 const grid=document.querySelector('#device-grid');
 if(grid){
  const allowed=['all','phone','tablet','redmagic','iqoo','oneplus','ace','legion','redmi','infinix','other'];

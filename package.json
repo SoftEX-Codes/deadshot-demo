@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "render:catalogue": "node scripts/render-catalogue.mjs",
     "test": "node tests/core.mjs",
     "test:db": "node tests/postgres.mjs"
   },

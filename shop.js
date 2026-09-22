@@ -1,9 +1,9 @@
-import {devices,catalogueError,cloudEnabled,getClient} from './store.js?v=6';
-import {money} from './devices-data.js?v=6';
-import {getCart,addToCart,setQuantity,cartSummary} from './cart-state.js?v=6';
-import {imageFor} from './device-utils.js?v=6';
-import {config} from './site-config.js?v=6';
-import {answerQuestion} from './assistant-core.js?v=6';
+import {devices,catalogueError,cloudEnabled,getClient} from './store.js?v=7';
+import {money} from './devices-data.js?v=7';
+import {getCart,addToCart,setQuantity,cartSummary} from './cart-state.js?v=7';
+import {imageFor} from './device-utils.js?v=7';
+import {config} from './site-config.js?v=7';
+import {answerQuestion} from './assistant-core.js?v=7';
 const make=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
 const toast=make('div','shop-toast');toast.setAttribute('role','status');document.body.append(toast);let toastTimer;
 export function notify(text){toast.textContent=text;toast.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('visible'),3500);}
@@ -16,6 +16,7 @@ function cartFeedback(button){
   document.querySelectorAll('[data-cart-count]').forEach(b=>b.animate([{transform:'scale(1)'},{transform:'scale(1.5) rotate(-8deg)'},{transform:'scale(1)'}],{duration:750,easing:'cubic-bezier(.2,.8,.2,1)'}));
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-add-cart]');if(!b)return;const d=devices.find(d=>d.id===b.dataset.addCart);if(!d)return;try{addToCart(d.id);cartFeedback(b);notify(d.name+' added to your cart.');}catch{notify('Your browser could not save the cart. Check storage settings.');}});
+document.querySelectorAll('[data-add-cart][hidden]').forEach(button=>button.hidden=false);
 if(catalogueError){const notice=make('p','connection-note',catalogueError);notice.setAttribute('role','alert');document.querySelector('main')?.prepend(notice);}
 if(!cloudEnabled){try{if(localStorage.getItem('deadshot-catalogue-preview-v1')){const n=make('p','preview-strip','Local catalogue preview: your edits appear only in this browser.');document.querySelector('main')?.prepend(n);}}catch{}}
 function renderCart(){

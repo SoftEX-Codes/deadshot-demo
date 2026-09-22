@@ -1,4 +1,4 @@
-import {money} from './devices-data.js?v=6';
+import {money} from './devices-data.js?v=7';
 const normal = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 const handoff = 'I can’t confirm that from the catalogue. Ask Thrift Gadgets on WhatsApp for a reliable answer.';
 export function answerQuestion(question, devices, lastId = '') {

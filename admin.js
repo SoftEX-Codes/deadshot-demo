@@ -1,6 +1,6 @@
-import {cloudEnabled,employee,readDevices,saveDevice,uploadImage,signOut,resetPreview} from './store.js?v=6';
-import {money} from './devices-data.js?v=6';
-import {imageFor,safeImage} from './device-utils.js?v=6';
+import {cloudEnabled,employee,readDevices,saveDevice,uploadImage,signOut,resetPreview} from './store.js?v=7';
+import {money} from './devices-data.js?v=7';
+import {imageFor,safeImage} from './device-utils.js?v=7';
 const make=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
 const root=document.querySelector('#admin-workspace'),form=document.querySelector('#device-editor'),notice=document.querySelector('#admin-status');
 let rows=[],current=null,dirty=false,busy=false,upload=null;

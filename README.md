@@ -13,6 +13,14 @@ A responsive, static GitHub Pages demo. Six linked pages: homepage, catalogue, d
 - An explicit **local admin preview**: open Employee login → Open admin preview. All catalogue devices are preloaded and editable; add a device, change its price/image/specifications, save a draft or publish to this browser's preview. Reset demo edits restores the initial catalogue.
 - Floating chat bubble with general phone explanations, model/specification/price/budget/comparison answers and WhatsApp referral. The basic guide works without an API and is labelled honestly; OpenAI answers need backend activation.
 - Slow headline phrase changes, card/image hover lift, cart feedback, animated chat opening/messages, and reduced-motion support.
+- Homepage and catalogue descriptions mention the actual brands and Nigeria, under 160 characters. Initial HTML includes 3 featured prices and all 32 catalogue prices, so price cards do not depend on JavaScript. Homepage category cards also show demo price ranges.
+- The homepage begins with a real product photograph. A lazy viewer loader gives 3D initialization 12 seconds, catches module/image failures and keeps the photograph visible on failure or with JavaScript disabled.
+
+## Contact and presentation choices
+
+WhatsApp remains the primary contact. An email fallback is prepared in `contact.js` and all page footers; it stays hidden until the business owner supplies an approved address in `site-config.js` (`contactEmail`). No placeholder or personal email is published.
+
+Demo labels and price disclaimers remain unchanged, pending the owner's explicit choice between demo and real-store presentation. The latest heading feedback was incomplete; heading wording has not been guessed or rewritten.
 
 ## Shared employee login and publishing
 
@@ -24,7 +32,7 @@ The optional AI edge function is implemented but not deployed or connected. It n
 
 ## Files and development
 
-Plain HTML, CSS and ES modules; no build step. Serve the repository root over HTTP for development. GitHub Pages uses `main` / repository root. `site-config.js` may contain only the Supabase public URL and publishable key. Service-role keys and AI credentials belong only in backend secrets.
+Plain HTML, CSS and ES modules; no bundler. Run `npm run render:catalogue` after changing seed devices to refresh the initial HTML cards and price ranges. The command removes seed cards when cloud mode is enabled; run it when enabling Supabase too. Serve the repository root over HTTP for development. GitHub Pages uses `main` / repository root. `site-config.js` may contain only the Supabase public URL and publishable key. Service-role keys and AI credentials belong only in backend secrets.
 
 `devices-data.js` is the initial/static catalogue. Once a backend is connected, database records are authoritative. A backend outage shows a catalogue error rather than stale seed stock. Images are self-hosted WebP; [credits](ASSETS.md). Supabase SDK and Three.js are pinned and self-hosted with license files.
 
@@ -35,3 +43,5 @@ Plain HTML, CSS and ES modules; no build step. Serve the repository root over HT
 Static checks passed for local page/asset links, unique element IDs, required form controls, JavaScript/TypeScript syntax, and homepage-only 3D loading. Front/back models were rendered through the software rasterizer and inspected. Live browser checks passed for homepage 3D controls, catalogue filters, real product photos, detail links, cart persistence/quantities/totals, theme persistence, WhatsApp links, local admin edits flowing through to details/cart, draft creation, and assistant answers/referrals. Cloud Auth, RLS, uploads and AI need integration testing after project provisioning; they are not claimed as verified now.
 
 Local SQL validation also passed on PGlite 0.5.8, using stubbed Supabase Auth and Storage schemas: all migrations and 32 seed records, anonymous/customer/staff/revoked-staff roles, image upload permissions, denied self-promotion, and service-only AI request limits. Reproduce with `npm install --ignore-scripts` then `npm run test:db`. This does not replace live Supabase Auth/email/Storage integration testing.
+
+`node --experimental-vm-modules tests/viewer-loader.mjs` verifies ready, failed-module, stalled-download, stalled-initialization, 12-second fallback and late-resolution behavior using the actual loader script.

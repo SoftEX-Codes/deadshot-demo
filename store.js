@@ -1,6 +1,6 @@
-import {devices as seed} from './devices-data.js?v=6';
-import {config, cloudEnabled} from './site-config.js?v=6';
-import {cleanDevice} from './device-utils.js?v=6';
+import {devices as seed} from './devices-data.js?v=7';
+import {config, cloudEnabled} from './site-config.js?v=7';
+import {cleanDevice} from './device-utils.js?v=7';
 export {cloudEnabled};
 const localKey = 'deadshot-catalogue-preview-v1';
 const initial = () => seed.map(d => ({...d,image:d.image||'assets/'+d.id+'.svg',status:'published',specs:d.specs||[],_version:null}));
