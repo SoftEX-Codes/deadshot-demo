@@ -1,4 +1,4 @@
-# MCOD GADGET STORE demo
+# Thrift Gadgets demo
 
 [Open the website](https://softex-codes.github.io/deadshot-demo/)
 

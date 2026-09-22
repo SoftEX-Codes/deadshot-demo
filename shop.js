@@ -40,7 +40,7 @@ function renderCart(){
   }
   document.querySelector('#cart-total').textContent=money(total);document.querySelector('#cart-item-count').textContent=String(lines.reduce((n,r)=>n+r.quantity,0));
   const link=document.querySelector('#cart-enquire');link.hidden=!available.length||available.length!==lines.length;
-  link.href='https://wa.me/2349038237257?text='+encodeURIComponent('Hi MCOD GADGET STORE, please confirm actual prices and availability for my enquiry:\n'+available.map(r=>r.quantity+' × '+r.device.name+' ('+r.device.memory+') — demo '+money(r.device.price*r.quantity)).join('\n')+'\nIllustrative total: '+money(total)+'. I understand these are demo prices, not a confirmed order.');
+  link.href='https://wa.me/2347070724905?text='+encodeURIComponent('Hi Thrift Gadgets, please confirm actual prices and availability for my enquiry:\n'+available.map(r=>r.quantity+' × '+r.device.name+' ('+r.device.memory+') — demo '+money(r.device.price*r.quantity)).join('\n')+'\nIllustrative total: '+money(total)+'. I understand these are demo prices, not a confirmed order.');
 }
 renderCart();
 // Basic answers work offline. The configured backend supplies OpenAI answers.
@@ -50,7 +50,7 @@ const outline=document.createElementNS(bubble.namespaceURI,'path');outline.setAt
 for(const x of [10,16,22]){const dot=document.createElementNS(bubble.namespaceURI,'circle');dot.setAttribute('cx',x);dot.setAttribute('cy','14');dot.setAttribute('r','1.5');dot.setAttribute('fill','currentColor');bubble.append(dot);}
 launch.append(bubble,make('span','chat-tooltip','Let’s talk phones'));
 const dialog=make('dialog','assistant-panel');dialog.id='device-assistant';dialog.setAttribute('aria-labelledby','assistant-title');
-const head=make('div','assistant-head'),heading=make('div');const title=make('h2','','MCOD GADGET STORE CHAT');title.id='assistant-title';heading.append(title,make('p','','Phone questions. Straight answers.'));
+const head=make('div','assistant-head'),heading=make('div');const title=make('h2','','THRIFT GADGETS CHAT');title.id='assistant-title';heading.append(title,make('p','','Phone questions. Straight answers.'));
 const close=make('button','icon-button','×');close.type='button';close.setAttribute('aria-label','Close chat');head.append(heading,close);
 const log=make('div','assistant-log');log.setAttribute('role','log');log.setAttribute('aria-label','Device assistant conversation');log.setAttribute('aria-live','polite');
 const quick=make('div','assistant-quick');for(const q of ['RAM vs storage?','What is refresh rate?','Phones under ₦900k']){const b=make('button','',q);b.type='button';b.addEventListener('click',()=>ask(q));quick.append(b);}
@@ -73,7 +73,7 @@ async function ask(question){
   }
   lastId=answer.lastId;const reply=message(answer.text);reply.append(make('small','ai-label',answer.ai?'OpenAI answer · verify key details with the team.':'Basic phone guide'));
   for(const id of answer.ids.slice(0,4)){const d=devices.find(d=>d.id===id),a=make('a','chat-device-link','View '+d.name);a.href='device.html?id='+encodeURIComponent(id);reply.append(a);}
-  if(answer.refer){const a=make('a','chat-whatsapp','Ask on WhatsApp · +2349038237257');a.href='https://wa.me/2349038237257?text='+encodeURIComponent('Hi MCOD GADGET STORE, I need help with: '+q);a.target='_blank';a.rel='noopener noreferrer';reply.append(a);}
+  if(answer.refer){const a=make('a','chat-whatsapp','Ask on WhatsApp · 2347070724905');a.href='https://wa.me/2347070724905?text='+encodeURIComponent('Hi Thrift Gadgets, I need help with: '+q);a.target='_blank';a.rel='noopener noreferrer';reply.append(a);}
   log.scrollTop=log.scrollHeight;
 }
 form.addEventListener('submit',e=>{e.preventDefault();ask(input.value);});
