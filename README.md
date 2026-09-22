@@ -20,7 +20,7 @@ A responsive, static GitHub Pages demo. Six linked pages: homepage, catalogue, d
 
 WhatsApp remains the primary contact. An email fallback is prepared in `contact.js` and all page footers; it stays hidden until the business owner supplies an approved address in `site-config.js` (`contactEmail`). No placeholder or personal email is published.
 
-Demo labels and price disclaimers remain unchanged, pending the owner's explicit choice between demo and real-store presentation. The latest heading feedback was incomplete; heading wording has not been guessed or rewritten.
+Demo labels and price disclaimers remain unchanged at the owner's request. Homepage section headings use direct, player-focused calls to action, with existing markup, line breaks and styling preserved.
 
 ## Shared employee login and publishing
 
