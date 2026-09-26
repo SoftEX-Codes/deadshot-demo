@@ -1,6 +1,6 @@
 import {money} from './devices-data.js?v=7';
 const normal = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
-const handoff = 'I can’t confirm that from the catalogue. Ask Thrift Gadgets on WhatsApp for a reliable answer.';
+const handoff = 'I can’t confirm that from the catalogue. Ask Moxie Gadgets on WhatsApp for a reliable answer.';
 export function answerQuestion(question, devices, lastId = '') {
   const q=normal(question).replace(/red magic/g,'redmagic').replace(/neo 9/g,'neo9').replace(/neo 10/g,'neo10');
   const result=(text,selected=[],refer=false)=>({text,ids:selected.map(d=>d.id),refer,lastId:selected.length===1?selected[0].id:lastId});
@@ -56,6 +56,6 @@ export function answerQuestion(question, devices, lastId = '') {
     list=list.slice(0,6);
     return list.length?result('Here are some devices in the demo catalogue:\n'+list.map(d=>d.name+' — '+money(d.price)).join('\n')+'\nActual stock and pricing must be confirmed.',list):result(handoff,[],true);
   }
-  if(/\b(contact|whatsapp|human|employee|person|help)\b/.test(q))return result('Speak with Thrift Gadgets on WhatsApp: 2347070724905.',[],true);
+  if(/\b(contact|whatsapp|human|employee|person|help)\b/.test(q))return result('Speak with Moxie Gadgets on WhatsApp: +234 907 642 0186.',[],true);
   return result(handoff,[],true);
 }

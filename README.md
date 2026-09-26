@@ -1,4 +1,4 @@
-# Thrift Gadgets demo
+# Moxie Gadgets demo
 
 [Open the website](https://softex-codes.github.io/deadshot-demo/)
 
